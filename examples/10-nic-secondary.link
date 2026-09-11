@@ -1,0 +1,7 @@
+# /etc/systemd/network/10-nic-secondary.link — same idea for the second NIC.
+[Match]
+PermanentMACAddress=yy:yy:yy:yy:yy:yy
+
+[Link]
+Name=enp17s0
+WakeOnLan=off

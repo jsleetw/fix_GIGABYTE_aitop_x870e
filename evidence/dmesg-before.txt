@@ -1,0 +1,28 @@
+# GIGABYTE X870E AORUS XTREME AI TOP, BIOS F13c, Ubuntu 26.04, kernel 7.0.0-30-generic
+# Boot WITHOUT the override (2026-09-10). Only 0f:00.0 came up; 10:00.0 never got its BARs.
+# Which of the two loses is decided by enumeration order and changed between boots.
+pci 0000:00:02.1: bridge window [mem 0xdc400000-0xddafffff]: can't claim; address conflict with AMDIF031:00 [mem 0xdd500000-0xdd500fff]
+pci 0000:03:00.0: bridge window [mem 0xdc400000-0xddafffff]: can't claim; no compatible bridge window
+pci 0000:04:00.0: bridge window [mem 0xdda00000-0xddafffff]: can't claim; no compatible bridge window
+pci 0000:04:08.0: bridge window [mem 0xdc400000-0xdd7fffff]: can't claim; no compatible bridge window
+pci 0000:0a:00.0: bridge window [mem 0xdc400000-0xdd7fffff]: can't claim; no compatible bridge window
+pci 0000:0b:02.0: bridge window [mem 0xdd200000-0xdd3fffff]: can't claim; no compatible bridge window
+pci 0000:0b:04.0: bridge window [mem 0xdcc00000-0xdd0fffff]: can't claim; no compatible bridge window
+pci 0000:0b:06.0: bridge window [mem 0xdc400000-0xdc8fffff]: can't claim; no compatible bridge window
+pci 0000:0b:08.0: bridge window [mem 0xdd700000-0xdd7fffff]: can't claim; no compatible bridge window
+pci 0000:0b:0c.0: bridge window [mem 0xdd600000-0xdd6fffff]: can't claim; no compatible bridge window
+pci 0000:0b:0d.0: bridge window [mem 0xdd400000-0xdd5fffff]: can't claim; no compatible bridge window
+pci 0000:04:0c.0: bridge window [mem 0xdd900000-0xdd9fffff]: can't claim; no compatible bridge window
+pci 0000:04:0d.0: bridge window [mem 0xdd800000-0xdd8fffff]: can't claim; no compatible bridge window
+pci 0000:05:00.0: BAR 0 [mem 0xdda00000-0xdda03fff 64bit]: can't claim; no compatible bridge window
+pci 0000:0f:00.0: BAR 0 [mem 0xdd000000-0xdd07ffff 64bit]: can't claim; no compatible bridge window
+pci 0000:0f:00.0: BAR 2 [mem 0xdd0a0000-0xdd0a0fff 64bit]: can't claim; no compatible bridge window
+pci 0000:0f:00.0: BAR 4 [mem 0xdcc00000-0xdcffffff 64bit]: can't claim; no compatible bridge window
+pci 0000:10:00.0: BAR 0 [mem 0xdc800000-0xdc87ffff 64bit]: can't claim; no compatible bridge window
+pci 0000:10:00.0: BAR 2 [mem 0xdc8a0000-0xdc8a0fff 64bit]: can't claim; no compatible bridge window
+pci 0000:10:00.0: BAR 4 [mem 0xdc400000-0xdc7fffff 64bit]: can't claim; no compatible bridge window
+# ... the kernel then releases the whole subtree and re-assigns it into 0xf2000000-0xf31fffff (~18 MB):
+pci 0000:10:00.0: BAR 4 [mem size 0x00400000 64bit]: can't assign; no space
+pci 0000:10:00.0: BAR 0 [mem size 0x00080000 64bit]: can't assign; no space
+pci 0000:10:00.0: BAR 2 [mem size 0x00001000 64bit]: can't assign; no space
+atlantic 0000:10:00.0: probe with driver atlantic failed with error -5

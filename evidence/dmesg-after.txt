@@ -1,0 +1,21 @@
+# Same machine, first boot WITH the override (2026-09-11). The OEM ID in this run was AUTOIP;
+# the table shipped in this repo uses FIXNIC, everything else is identical.
+ACPI: Table Upgrade: install [SSDT-AUTOIP- SPTOOFF]
+ACPI: SSDT 0x000000009BFBB000 000072 (v02 AUTOIP SPTOOFF  00000001 INTL 20251212)
+pci 0000:00:02.1: PCI bridge to [bus 03-15]
+pci 0000:00:02.1: PCI bridge to [bus 03-15]
+pci 0000:0f:00.0: [1d6a:14c0] type 00 class 0x020000 PCIe Endpoint
+pci 0000:0f:00.0: BAR 0 [mem 0xdd000000-0xdd07ffff 64bit]
+pci 0000:0f:00.0: BAR 2 [mem 0xdd0a0000-0xdd0a0fff 64bit]
+pci 0000:0f:00.0: BAR 4 [mem 0xdcc00000-0xdcffffff 64bit]
+pci 0000:10:00.0: [1d6a:14c0] type 00 class 0x020000 PCIe Endpoint
+pci 0000:10:00.0: BAR 0 [mem 0xdc800000-0xdc87ffff 64bit]
+pci 0000:10:00.0: BAR 2 [mem 0xdc8a0000-0xdc8a0fff 64bit]
+pci 0000:10:00.0: BAR 4 [mem 0xdc400000-0xdc7fffff 64bit]
+pci 0000:00:02.1: PCI bridge to [bus 03-15]
+pci 0000:00:02.1: PCI bridge to [bus 03-15]
+atlantic 0000:10:00.0 enp17s0: renamed from eth1
+atlantic 0000:0f:00.0 enp16s0: renamed from eth0
+atlantic 0000:0f:00.0 enp16s0: atlantic: link change old 0 new 2500
+atlantic 0000:10:00.0 enp17s0: atlantic: link change old 0 new 2500
+# grep -c "can't claim" -> 0 ; grep -c 'address conflict with AMDIF031' -> 0

@@ -1,0 +1,15 @@
+# /etc/systemd/network/10-nic-primary.link  (also copy into the initramfs, see 90-nic-link.conf)
+#
+# Pin the interface name to the NIC's permanent MAC so the name is final on the very first udev
+# pass — the one that runs inside the initramfs. Why this matters once BOTH NICs are present:
+# the initramfs ships 99-default.link, which names interfaces by PCI path. On this board the
+# second NIC's path-based name (enp16s0 = bus 0x10) is exactly the name a netplan "set-name"
+# gives the first NIC, so the later rename in the real root fails and the bridge/bond built on
+# that name has no member. With this file in the initramfs, eth0/eth1 go straight to the final
+# names and no clash happens.
+[Match]
+PermanentMACAddress=xx:xx:xx:xx:xx:xx
+
+[Link]
+Name=enp16s0
+WakeOnLan=off
