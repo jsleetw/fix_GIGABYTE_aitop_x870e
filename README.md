@@ -8,6 +8,13 @@ GIGABYTE's reply to the bug report: *the board only supports Windows 11*. The ke
 
 Tested on: X870E AORUS XTREME AI TOP rev 1.x, BIOS F13a and F13c, Ryzen 9 9950X3D, Ubuntu 26.04, kernel 7.0.0-30 (dracut initramfs, GRUB).
 
+> **Not only GIGABYTE — ASRock X870E Taichi users, this is for you too.** Your board logs the identical
+> `can't claim; address conflict with AMDIF031:00` (kernel Bugzilla #220767, still open as of Dec 2025 on BIOS 4.03 /
+> kernel 6.18), because the ACPI code comes from AMD's dual-Promontory21 reference design, not from the board vendor.
+> Run `sudo scripts/find-chipset-gpio.sh` to get your board's device path and gate variable, put them into the two
+> lines of `ssdt-sptooff.dsl`, then follow the install steps. Please report back in an issue with your board and BIOS
+> version so the tested-on list can grow.
+
 ---
 
 ## Symptoms
@@ -142,6 +149,8 @@ MIT — see [LICENSE](LICENSE).
 ## 繁體中文摘要
 
 **症狀**：X870E AORUS XTREME AI TOP 在 Linux 下兩顆板載 AQC113C 10G 網卡只有一顆能用，而且每次開機死的可能不同顆。dmesg 關鍵字：`can't claim; address conflict with AMDIF031:00`、`can't assign; no space`。
+
+**也適用於 ASRock X870E Taichi**：kernel Bugzilla #220767 的訊息一字不差，因為 ACPI 碼來自 AMD 雙 Promontory21 參考設計，不是板廠自己寫的。先跑 `sudo scripts/find-chipset-gpio.sh` 找到你這塊板的裝置路徑與閘門變數，改 `ssdt-sptooff.dsl` 那兩行，其餘步驟相同。
 
 **根因**：BIOS 把第二顆晶片組的 GPIO 裝置（`SPTO`，_HID `AMDIF031`）宣告在 `0xDD500000`，正好落在晶片組 PCIe 橋 `00:02.1` 的視窗內。Linux 先把平台裝置資源插進 iomem 根層，之後認領橋視窗判定衝突、整棵子樹放掉重排；重排時兩顆網卡各要 5 MB 且 4 MB 對齊，只夠塞一顆。Windows 依 ACPI 命名空間父子關係配資源所以不會重現；技嘉回覆「僅支援 Windows 11」，核心端的 quirk 也被退，兩邊都不會修。ASRock X870E Taichi 有一模一樣的回報（kernel Bugzilla #220767）。
 
